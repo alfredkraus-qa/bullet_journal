@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    background: #f3f0e7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#journal {
+    position: relative;
+    width: 850px;
+    height: 600px;
+    background: linear-gradient(to bottom, #fff8e1, #fbeec1);
+    border: 2px solid #ececec00;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.tools {
+    position: absolute;
+    left: 20px;
+    top: 20%;
+    transform: translateY(-20%);
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+}
+
+.tool {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    width: 100px; 
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tool.active {
+    background: #f3d250;
+    border-color: #d4af37;
+}
+
+.tool:hover {
+    background: #f0e6d8;
+}
+
+.spread {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pagina {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(to bottom, #fff8e1, #fbeec1);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.pagina.pontilhada {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
