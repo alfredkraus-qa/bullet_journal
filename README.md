@@ -35,6 +35,12 @@ Criar um bullet journal digital tem sido uma jornada desafiadora, especialmente:
 
 Inicialmente, não adicionei nenhum recurso em JavaScript, pois queria avaliar como o esboço ficaria. Enfrentei dificuldades no CSS devido à variedade de opções para estilizar o bullet journal, mas a abordagem minimalista me agradou e acredito que estou no caminho certo. A próxima etapa será adicionar ícones para as funcionalidades na lateral, inspirados no design do Miro. Em seguida, começarei a programar em JavaScript para dar vida aos bullets.
 
+#### Wireframe finalizado no HTML e CSS
+
+<img width="1440" alt="Screenshot 2025-01-06 at 16 38 13" src="https://github.com/user-attachments/assets/2ac1329e-a2ea-46af-bf33-94a3587733fb" />
+
+Finalizei a parte estética do bullet journal: adicionei uma "logo" para torná-lo mais atrativo, substituí as caixas de funcionalidades por ícones clicáveis e alterei o fundo para algo mais harmonioso. Já iniciei a implementação em JavaScript, criando as const e let como ponto de partida para dar funcionalidade ao projeto.
+
 ## Material de Pesquisa
 
 [SITE - W3SCHOOLS](https://www.w3schools.com/)
