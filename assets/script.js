@@ -38,32 +38,32 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(toolId).classList.add("active")
         currentTool = toolId
     }
-     // Ferramenta padrão: Mouse
-     setActiveTool("mouse")
+    // Ferramenta padrão: Mouse
+    setActiveTool("mouse")
 
-     // Configurações para alternar ferramentas
-     tools.forEach(tool => {
+    // Configurações para alternar ferramentas
+    tools.forEach(tool => {
          tool.addEventListener("click", () => {
-             setActiveTool(tool.id)
+            setActiveTool(tool.id)
          })
-     })
+    })
  
-     // Ativando ferramentas para ambas as páginas
-     enablePen(canvasLeft, ctxLeft)
-     enableEraser(canvasLeft, ctxLeft)
-     enableHighlighter(canvasLeft, ctxLeft)
-     enableTextTool(canvasLeft)
- 
-     enablePen(canvasRight, ctxRight)
-     enableEraser(canvasRight, ctxRight)
-     enableHighlighter(canvasRight, ctxRight)
-     enableTextTool(canvasRight)
+    // Ativando ferramentas para ambas as páginas
+        enablePen(canvasLeft, ctxLeft)
+        enableEraser(canvasLeft, ctxLeft)
+        enableHighlighter(canvasLeft, ctxLeft)
+        enableTextTool(canvasLeft)
+    
+        enablePen(canvasRight, ctxRight)
+        enableEraser(canvasRight, ctxRight)
+        enableHighlighter(canvasRight, ctxRight)
+        enableTextTool(canvasRight)
 
     // Ferramenta: Lápis/Caneta
-    function enablePen(canvas, ctx) {
-        canvas.addEventListener("mousedown", startDrawing)
-        canvas.addEventListener("mousemove", draw)
-        canvas.addEventListener("mouseup", stopDrawing)
+        function enablePen(canvas, ctx) {
+            canvas.addEventListener("mousedown", startDrawing)
+            canvas.addEventListener("mousemove", draw)
+            canvas.addEventListener("mouseup", stopDrawing)
 
         function startDrawing(event) {
             if (currentTool !== "pen") return
@@ -85,11 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.closePath()
         }
     }
-     // Ferramenta: Borracha
-     function enableEraser(canvas, ctx) {
-        canvas.addEventListener("mousedown", startErasing)
-        canvas.addEventListener("mousemove", erase)
-        canvas.addEventListener("mouseup", stopErasing)
+    // Ferramenta: Borracha
+        function enableEraser(canvas, ctx) {
+            canvas.addEventListener("mousedown", startErasing)
+            canvas.addEventListener("mousemove", erase)
+            canvas.addEventListener("mouseup", stopErasing)
 
         function startErasing(event) {
             if (currentTool !== "eraser") return
@@ -105,4 +105,69 @@ document.addEventListener("DOMContentLoaded", () => {
             drawing = false
         }
     }
-})
+    // Ferramenta: Marca-texto
+        function enableHighlighter(canvas, ctx) {
+            canvas.addEventListener("mousedown", startHighlighting)
+            canvas.addEventListener("mousemove", highlight)
+            canvas.addEventListener("mouseup", stopHighlighting)
+
+        function startHighlighting(event) {
+            if (currentTool !== "highlight") return
+            drawing = true
+            ctx.globalCompositeOperation = "source-over"
+            ctx.beginPath()
+            ctx.moveTo(event.offsetX, event.offsetY)
+        }
+
+        function highlight(event) {
+            if (!drawing || currentTool !== "highlight") return
+            ctx.lineTo(event.offsetX, event.offsetY)
+            ctx.strokeStyle = "rgba(0, 288, 0, 0.1)"
+            ctx.lineWidth = 20
+            ctx.stroke()
+        }
+
+        function stopHighlighting() {
+            drawing = false
+            ctx.closePath()
+        }
+    }
+    // Ferramenta: Texto
+        function enableTextTool(canvas) {
+            canvas.addEventListener("click", addText)
+
+        function addText(event) {
+            if (currentTool !== "text") return
+
+            const input = document.createElement("textarea")
+            input.style.position = "absolute"
+            input.style.left = `${event.pageX - journal.offsetLeft}px`
+            input.style.top = `${event.pageY - journal.offsetTop}px`
+            input.style.fontSize = "16px"
+            input.style.background = "transparent"
+            input.style.border = "none"
+            input.style.outline = "none"
+            input.style.resize = "none"
+            input.style.color = "#000"
+            input.style.zIndex = 10
+            journal.appendChild(input)
+
+            input.focus()
+
+            input.addEventListener("blur", () => {
+                const text = document.createElement("div")
+                text.textContent = input.value
+                text.style.position = "absolute"
+                text.style.left = input.style.left
+                text.style.top = input.style.top
+                text.style.fontSize = input.style.fontSize
+                text.style.color = "#000"
+                text.style.cursor = "move"
+                text.draggable = false;
+                text.classList.add("movable-text")
+                journal.appendChild(text)
+                input.remove()
+            })
+        }
+    }
+ })
