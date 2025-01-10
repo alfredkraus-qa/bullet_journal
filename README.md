@@ -41,6 +41,20 @@ Inicialmente, não adicionei nenhum recurso em JavaScript, pois queria avaliar c
 
 Finalizei a parte estética do bullet journal: adicionei uma "logo" para torná-lo mais atrativo, substituí as caixas de funcionalidades por ícones clicáveis e alterei o fundo para algo mais harmonioso. Já iniciei a implementação em JavaScript, criando as const e let como ponto de partida para dar funcionalidade ao projeto.
 
+#### implementação em JavaScript
+
+<img width="1439" alt="Screenshot 2025-01-09 at 17 42 37" src="https://github.com/user-attachments/assets/5a737b4b-6472-4bec-8e7d-66b3198229d6" />
+
+Agora com o JavaScript, estou adicionando funcionalidades dinâmicas, como ferramentas para desenhar e apagar. Cada ferramenta tem um comportamento específico:
+
+Caneta: Permite desenhar no caderno ao arrastar o mouse.
+
+Borracha: Apaga áreas específicas ao redor do cursor.
+
+A lógica está baseada em eventos do mouse, onde ações como clicar, mover e soltar ativam os diferentes modos. Além disso, configurei duas áreas de canvas independentes para tornar o uso mais versátil. Assim, o projeto começa a ganhar vida, aproximando-se da experiência de um caderno físico.
+
+No momento, implementei apenas essas funcionalidades, e ambas estão funcionando como eu esperava. Entretanto, um dos desafios que encontrei até agora é que ainda não consigo desenhar na página direita do caderno, e estou buscando uma solução para ajustar essa lógica. Esse problema tem se mostrado mais desafiador do que eu imaginava. Assim que conseguir resolver essa questão, meu próximo passo será implementar as funcionalidades de marca-texto e inserção de texto, para dar continuidade ao desenvolvimento do projeto.
+
 ## Material de Pesquisa
 
 [SITE - W3SCHOOLS](https://www.w3schools.com/)
