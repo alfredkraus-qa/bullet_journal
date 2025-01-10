@@ -23,7 +23,9 @@ Escrever à mão se tornou uma verdadeira terapia para mim. Pensando nisso, deci
 Criar um bullet journal digital tem sido uma jornada desafiadora, especialmente:
 
 • Encontrar o equilíbrio entre funcionalidade e design minimalista.
+
 • Garantir que a interface seja intuitiva para qualquer usuário.
+
 • Implementar funcionalidades dinâmicas, como utilizar texto, borracha, caneta livremente pelo caderno.
 
 ## Resultados do projeto
@@ -41,19 +43,27 @@ Inicialmente, não adicionei nenhum recurso em JavaScript, pois queria avaliar c
 
 Finalizei a parte estética do bullet journal: adicionei uma "logo" para torná-lo mais atrativo, substituí as caixas de funcionalidades por ícones clicáveis e alterei o fundo para algo mais harmonioso. Já iniciei a implementação em JavaScript, criando as const e let como ponto de partida para dar funcionalidade ao projeto.
 
-#### implementação em JavaScript
+#### Implementação em JavaScript
 
 <img width="1439" alt="Screenshot 2025-01-09 at 17 42 37" src="https://github.com/user-attachments/assets/5a737b4b-6472-4bec-8e7d-66b3198229d6" />
 
-Agora com o JavaScript, estou adicionando funcionalidades dinâmicas, como ferramentas para desenhar e apagar. Cada ferramenta tem um comportamento específico:
-
-Caneta: Permite desenhar no caderno ao arrastar o mouse.
-
-Borracha: Apaga áreas específicas ao redor do cursor.
+Agora com o JavaScript, estou adicionando funcionalidades dinâmicas, como ferramentas para desenhar e apagar. 
 
 A lógica está baseada em eventos do mouse, onde ações como clicar, mover e soltar ativam os diferentes modos. Além disso, configurei duas áreas de canvas independentes para tornar o uso mais versátil. Assim, o projeto começa a ganhar vida, aproximando-se da experiência de um caderno físico.
 
 No momento, implementei apenas essas funcionalidades, e ambas estão funcionando como eu esperava. Entretanto, um dos desafios que encontrei até agora é que ainda não consigo desenhar na página direita do caderno, e estou buscando uma solução para ajustar essa lógica. Esse problema tem se mostrado mais desafiador do que eu imaginava. Assim que conseguir resolver essa questão, meu próximo passo será implementar as funcionalidades de marca-texto e inserção de texto, para dar continuidade ao desenvolvimento do projeto.
+
+#### Adicionando novas funcionalidades: marca-texto e inserir texto
+
+<img width="1440" alt="Screenshot 2025-01-10 at 17 07 12" src="https://github.com/user-attachments/assets/bb7e5aec-2872-404e-9b28-99aabe0a54d6" />
+
+Dando continuidade ao projeto, consegui resolver o problema da página direita, que não permitia desenhar ou apagar. Era apenas uma questão de ajustar uma lógica que estava implementada de forma incorreta. Além disso, implementei as duas ferramentas que estavam faltando: o marca-texto e a funcionalidade de inserir texto.
+
+Agora, ambas as ferramentas estão funcionando perfeitamente e cumprindo seus propósitos. A lógica do marca-texto foi relativamente simples de implementar, pois segue uma estrutura similar às funções de desenho e borracha. Já para a funcionalidade de inserir texto, precisei investir mais tempo para compreender o comportamento correto dos inputs, mas, no final, consegui alcançar o resultado desejado.
+
+Com isso, considero o projeto funcional, mas ainda pretendo fazer alguns ajustes para torná-lo mais dinâmico e interativo.
+
+Assim que concluir esses ajustes finais, criarei uma branch separada para a versão 1, onde documentarei todas as melhorias realizadas. Também farei um vídeo ou GIF demonstrando o funcionamento na prática para compartilhar aqui.
 
 ## Material de Pesquisa
 
