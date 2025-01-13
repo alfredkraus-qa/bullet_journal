@@ -42,8 +42,7 @@ header {
 .tools {
     position: absolute;
     left: 10px;
-    top: 35%;
-    transform: translateY(-50%);
+    top: 15%;
     display: flex;
     flex-direction: column; 
     align-items: center; 
@@ -53,6 +52,11 @@ header {
     box-shadow: 0 2px 5px rgba(1, 1, 1, 0.1); 
     padding: 10px;
     z-index: 5; 
+    cursor:grab;
+}
+
+.tools.active {
+    cursor: grabbing;
 }
 
 .tool {
