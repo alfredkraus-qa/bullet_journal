@@ -1,4 +1,4 @@
-// DOM - elementos necessários
+    // DOM - elementos necessários
 document.addEventListener("DOMContentLoaded", () => {
     const tools = document.querySelectorAll(".tool")
     const canvasLeft = document.getElementById("canvas-left")
@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctxLeft = canvasLeft.getContext("2d")
     const ctxRight = canvasRight.getContext("2d")
     const journal = document.getElementById("journal")
+    const toolsContainer = document.getElementById("tools")
     let currentTool = "mouse"
-    let drawing = false;
+    let drawing = false
+    let isDragging = false
+    let offsetX = 0, offsetY = 0
 
     // Configurações iniciais do canvas
-    [canvasLeft, canvasRight].forEach(canvas => {
+    ;[canvasLeft, canvasRight].forEach(canvas => {
         canvas.width = canvas.offsetWidth
         canvas.height = canvas.offsetHeight
     })
@@ -38,32 +41,63 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(toolId).classList.add("active")
         currentTool = toolId
     }
+
     // Ferramenta padrão: Mouse
     setActiveTool("mouse")
 
     // Configurações para alternar ferramentas
     tools.forEach(tool => {
-         tool.addEventListener("click", () => {
+        tool.addEventListener("click", () => {
             setActiveTool(tool.id)
-         })
+        })
     })
- 
-    // Ativando ferramentas para ambas as páginas
-        enablePen(canvasLeft, ctxLeft)
-        enableEraser(canvasLeft, ctxLeft)
-        enableHighlighter(canvasLeft, ctxLeft)
-        enableTextTool(canvasLeft)
-    
-        enablePen(canvasRight, ctxRight)
-        enableEraser(canvasRight, ctxRight)
-        enableHighlighter(canvasRight, ctxRight)
-        enableTextTool(canvasRight)
 
-    // Ferramenta: Lápis/Caneta
-        function enablePen(canvas, ctx) {
-            canvas.addEventListener("mousedown", startDrawing)
-            canvas.addEventListener("mousemove", draw)
-            canvas.addEventListener("mouseup", stopDrawing)
+    // Movimentação do contêiner de ferramentas
+    toolsContainer.addEventListener("mousedown", (e) => {
+        isDragging = true
+        offsetX = e.clientX - toolsContainer.offsetLeft
+        offsetY = e.clientY - toolsContainer.offsetTop
+        toolsContainer.style.transition = "none"
+    })
+
+    document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+            const journalRect = journal.getBoundingClientRect()
+
+            let newLeft = e.clientX - offsetX
+            let newTop = e.clientY - offsetY
+
+            newLeft = Math.max(0, Math.min(newLeft, journal.offsetWidth - toolsContainer.offsetWidth))
+            newTop = Math.max(0, Math.min(newTop, journal.offsetHeight - toolsContainer.offsetHeight))
+
+            toolsContainer.style.left = `${newLeft}px`
+            toolsContainer.style.top = `${newTop}px`
+        }
+    })
+
+    document.addEventListener("mouseup", () => {
+        if (isDragging) {
+            isDragging = false
+            toolsContainer.style.transition = "all 0.1s ease"
+        }
+    })
+
+    // Ativando ferramentas para ambas as páginas
+    enablePen(canvasLeft, ctxLeft)
+    enableEraser(canvasLeft, ctxLeft)
+    enableHighlighter(canvasLeft, ctxLeft)
+    enableTextTool(canvasLeft)
+
+    enablePen(canvasRight, ctxRight)
+    enableEraser(canvasRight, ctxRight)
+    enableHighlighter(canvasRight, ctxRight)
+    enableTextTool(canvasRight)
+
+    // Ferramenta: Lápis / Caneta
+    function enablePen(canvas, ctx) {
+        canvas.addEventListener("mousedown", startDrawing)
+        canvas.addEventListener("mousemove", draw)
+        canvas.addEventListener("mouseup", stopDrawing)
 
         function startDrawing(event) {
             if (currentTool !== "pen") return
@@ -86,10 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     // Ferramenta: Borracha
-        function enableEraser(canvas, ctx) {
-            canvas.addEventListener("mousedown", startErasing)
-            canvas.addEventListener("mousemove", erase)
-            canvas.addEventListener("mouseup", stopErasing)
+    function enableEraser(canvas, ctx) {
+        canvas.addEventListener("mousedown", startErasing)
+        canvas.addEventListener("mousemove", erase)
+        canvas.addEventListener("mouseup", stopErasing)
 
         function startErasing(event) {
             if (currentTool !== "eraser") return
@@ -106,10 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     // Ferramenta: Marca-texto
-        function enableHighlighter(canvas, ctx) {
-            canvas.addEventListener("mousedown", startHighlighting)
-            canvas.addEventListener("mousemove", highlight)
-            canvas.addEventListener("mouseup", stopHighlighting)
+    function enableHighlighter(canvas, ctx) {
+        canvas.addEventListener("mousedown", startHighlighting)
+        canvas.addEventListener("mousemove", highlight)
+        canvas.addEventListener("mouseup", stopHighlighting)
 
         function startHighlighting(event) {
             if (currentTool !== "highlight") return
@@ -133,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     // Ferramenta: Texto
-        function enableTextTool(canvas) {
-            canvas.addEventListener("click", addText)
+    function enableTextTool(canvas) {
+        canvas.addEventListener("click", addText)
 
         function addText(event) {
             if (currentTool !== "text") return
@@ -163,11 +197,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 text.style.fontSize = input.style.fontSize
                 text.style.color = "#000"
                 text.style.cursor = "move"
-                text.draggable = false;
+                text.draggable = false
                 text.classList.add("movable-text")
                 journal.appendChild(text)
                 input.remove()
             })
         }
     }
- })
+    // Zoom simples com a rolagem do mouse
+    let zoomLevel = 1
+
+    journal.addEventListener("wheel", (event) => {
+        event.preventDefault()
+        const scaleAmount = 0.1
+
+        if (event.deltaY < 0) {
+            zoomLevel += scaleAmount
+        } else {
+            zoomLevel = Math.max(0.1, zoomLevel - scaleAmount)
+        }
+
+        journal.style.transition = "transform 0.2s ease"
+        journal.style.transform = `scale(${zoomLevel})`
+    })
+})
